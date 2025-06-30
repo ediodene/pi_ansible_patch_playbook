@@ -1,0 +1,21 @@
+- name: Patch play
+  hosts: myhosts
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+   - name: Print message
+     ansible.builtin.debug:
+       msg: Hello world
+
+   - name: Disk Space Check
+     ansible.builtin.command: df -H
+     register: command_output
+
+   - name: Display the output
+     ansible.builtin.debug:
+       var: command_output
+
+   - name: Execute the command in remote shell; stdout goes to the specified file on the remote
+     ansible.builtin.shell: /home/pi/patch.sh >> patch.txt
+     become: true
